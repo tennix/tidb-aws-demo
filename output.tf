@@ -13,6 +13,11 @@ output "sysbench_ip" {
   value       = aws_instance.sysbench.*.private_ip
 }
 
+output "pd_ip" {
+  description = "pd machine IP"
+  value       = aws_instance.pd.*.private_ip
+}
+
 output "tidb_ip" {
   description = "tidb machine IP"
   value       = aws_instance.tidb.*.private_ip

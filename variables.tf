@@ -41,6 +41,12 @@ variable "sysbench_count" {
   default     = 1
 }
 
+variable "pd_count" {
+  type        = string
+  description = "pd instance count"
+  default     = 3
+}
+
 variable "tidb_count" {
   type        = string
   description = "tidb instance count"

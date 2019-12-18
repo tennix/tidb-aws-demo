@@ -86,6 +86,18 @@ resource "aws_instance" "sysbench" {
   }
 }
 
+resource "aws_instance" "pd" {
+  instance_type          = "m5.xlarge"
+  ami                    = data.aws_ami.centos.id
+  availability_zone      = "${data.aws_availability_zones.available.names[count.index % 3]}"
+  vpc_security_group_ids = [aws_security_group.tidb_internal.id]
+  key_name               = var.ssh_key_name
+  count                  = var.pd_count
+  tags = {
+    Name = "${var.cluster_name}-pd-${count.index}"
+  }
+}
+
 resource "aws_instance" "tidb" {
   instance_type          = "c5.4xlarge"
   ami                    = data.aws_ami.centos.id
